@@ -1,6 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Contact = () => {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (input.trim()) {
+      const newMessages = [...messages, { text: input, sender: 'user' }];
+      setMessages(newMessages);
+      setInput('');
+
+      // Simulate bot response
+      setTimeout(() => {
+        let botResponse = "I'm sorry, I didn't understand that. Please ask about our services (Digital Marketing, Web Development, AI Development, App Development) or how to get a consultation.";
+        if (input.toLowerCase().includes('service')) {
+          botResponse = "VynixCore offers Digital Marketing, Web Development, AI Development, and App Development services. Which one are you interested in?";
+        } else if (input.toLowerCase().includes('consultation')) {
+          botResponse = "You can get a free consultation by filling out the form on this page or by calling us at +1 (555) 123-4567.";
+        } else if (input.toLowerCase().includes('digital marketing')) {
+          botResponse = "Our Digital Marketing services include SEO, PPC, social media, and content strategy to boost your online presence.";
+        } else if (input.toLowerCase().includes('web development')) {
+          botResponse = "We specialize in responsive websites, e-commerce solutions, and custom web applications.";
+        } else if (input.toLowerCase().includes('ai development')) {
+          botResponse = "Our AI Development services cover chatbots, predictive analytics, and automation MVPs.";
+        } else if (input.toLowerCase().includes('app development')) {
+          botResponse = "We build cross-platform mobile and web applications tailored to your needs.";
+        }
+        setMessages([...newMessages, { text: botResponse, sender: 'bot' }]);
+      }, 1000);
+    }
+  };
+
   return (
     <div className="container mx-auto py-16 px-4">
       <h1 className="text-4xl font-bold text-center text-gray-900 mb-12">Contact Us</h1>
@@ -48,11 +79,29 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* AI Chatbot Demo Placeholder */}
+          {/* AI Chatbot Demo */}
           <div className="mt-8">
             <h3 className="text-2xl font-semibold text-gray-800 mb-4">Try Our AI Chatbot Demo</h3>
-            <div className="bg-gray-200 h-48 flex items-center justify-center rounded-md text-gray-600">
-              AI Chatbot Demo will be integrated here
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md h-80 flex flex-col">
+              <div className="flex-grow overflow-y-auto mb-4 p-2 border border-gray-300 rounded-md">
+                {messages.map((msg, index) => (
+                  <div key={index} className={`mb-2 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
+                    <span className={`inline-block p-2 rounded-lg ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800'}`}>
+                      {msg.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <form onSubmit={handleSendMessage} className="flex">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type your message..."
+                  className="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition duration-300">Send</button>
+              </form>
             </div>
           </div>
         </div>
