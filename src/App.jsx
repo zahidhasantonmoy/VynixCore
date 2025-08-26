@@ -5,7 +5,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import Portfolio from './pages/Portfolio'; // Import Portfolio component
+import Portfolio from './pages/Portfolio';
+import Blog from './pages/Blog'; // Import Blog component
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/portfolio" element={<Portfolio />} /> {/* Add route for Portfolio page */}
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/blog" element={<Blog />} /> {/* Add route for Blog page */}
             {/* Other routes will go here */}
           </Routes>
         </main>
