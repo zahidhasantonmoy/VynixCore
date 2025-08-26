@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import About from './pages/About'; // Import About component
+import About from './pages/About';
+import Services from './pages/Services'; // Import Services component
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} /> {/* Add route for About page */}
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} /> {/* Add route for Services page */}
             {/* Other routes will go here */}
           </Routes>
         </main>
