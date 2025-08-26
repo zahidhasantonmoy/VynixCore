@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <header className="bg-gray-800 text-white p-4">
-      <nav className="container mx-auto flex justify-between items-center">
+      <nav className="container mx-auto flex justify-between items-center" aria-label="Main navigation"> {/* Added aria-label */}
         <div className="text-2xl font-bold">VynixCore</div>
         <ul className="flex space-x-4">
           <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
