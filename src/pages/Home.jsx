@@ -1,5 +1,6 @@
 import React from 'react';
 import ServiceCard from '../components/ServiceCard';
+import TestimonialSlider from '../components/TestimonialSlider'; // Import TestimonialSlider
 
 const Home = () => {
   return (
@@ -34,6 +35,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <TestimonialSlider /> {/* Add TestimonialSlider here */}
     </>
   );
 };
