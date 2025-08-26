@@ -1,6 +1,7 @@
 import React from 'react';
 import ServiceCard from '../components/ServiceCard';
-import TestimonialSlider from '../components/TestimonialSlider'; // Import TestimonialSlider
+import TestimonialSlider from '../components/TestimonialSlider';
+import AnimatedStats from '../components/AnimatedStats'; // Import AnimatedStats
 
 const Home = () => {
   return (
@@ -36,7 +37,8 @@ const Home = () => {
         </div>
       </section>
 
-      <TestimonialSlider /> {/* Add TestimonialSlider here */}
+      <TestimonialSlider />
+      <AnimatedStats /> {/* Add AnimatedStats here */}
     </>
   );
 };
