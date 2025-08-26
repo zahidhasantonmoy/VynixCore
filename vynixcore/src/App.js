@@ -1,12 +1,13 @@
 import React from 'react';
 import Header from './components/Header';
+import Hero from './components/Hero';
 
 function App() {
   return (
     <div className="min-h-screen bg-neutral-gray-dark text-white">
       <Header />
       <main>
-        {/* Main content will go here */}
+        <Hero />
       </main>
     </div>
   );
