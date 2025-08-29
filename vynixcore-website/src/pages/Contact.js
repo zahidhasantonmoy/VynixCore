@@ -11,7 +11,8 @@ import {
   FaTwitter,
   FaSend,
   FaUser,
-  FaPaperPlane
+  FaPaperPlane,
+  FaClock
 } from 'react-icons/fa';
 import './Contact.css';
 

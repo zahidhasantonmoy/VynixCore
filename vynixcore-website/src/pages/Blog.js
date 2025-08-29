@@ -9,7 +9,8 @@ import {
   FaCalendarAlt,
   FaUser,
   FaTags,
-  FaArrowRight
+  FaArrowRight,
+  FaClock
 } from 'react-icons/fa';
 import './Blog.css';
 
@@ -68,7 +69,7 @@ const Blog = () => {
     {
       id: 6,
       title: 'Building Cross-Platform Apps with Flutter',
-      excerpt: 'A deep dive into Flutter and why it's becoming the go-to framework for cross-platform development.',
+      excerpt: 'A deep dive into Flutter and why it\'s becoming the go-to framework for cross-platform development.',
       date: 'July 15, 2025',
       author: 'Michael Chen',
       category: 'App Development',
