@@ -1,0 +1,147 @@
+/* Blog.css */
+
+/* Hero Section */
+.blog-hero {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(14, 165, 233, 0.05));
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-hero:before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Search Bar */
+.search-bar {
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 5px;
+}
+
+.search-bar .form-control {
+  border: none;
+  background: transparent;
+  padding: 10px 20px;
+}
+
+.search-bar .btn {
+  border-radius: 25px !important;
+  padding: 8px 20px;
+}
+
+/* Blog Cards */
+.blog-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.blog-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+}
+
+.blog-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-image {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-image {
+  transform: scale(1.05);
+}
+
+.blog-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.blog-category {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Popular Posts */
+.popular-post-image img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+}
+
+/* Sticky Sidebar */
+.sticky-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+/* Pagination */
+.page-item .page-link {
+  border-radius: 10px !important;
+  margin: 0 5px;
+  border: none;
+  color: var(--primary);
+}
+
+.page-item.active .page-link {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+}
+
+.page-item .page-link:hover {
+  background: rgba(37, 99, 235, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .sticky-sidebar {
+    position: static;
+  }
+  
+  .blog-image {
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-image {
+    height: 220px;
+  }
+  
+  .search-bar .btn {
+    padding: 8px 15px;
+  }
+}

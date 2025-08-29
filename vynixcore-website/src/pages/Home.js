@@ -1,28 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
-import { FaChartLine, FaRobot, FaLaptopCode } from 'react-icons/fa';
+import { 
+  FaChartLine, 
+  FaRobot, 
+  FaLaptopCode, 
+  FaMobileAlt,
+  FaCheckCircle,
+  FaStar,
+  FaQuoteLeft
+} from 'react-icons/fa';
+import './Home.css';
 
 const Home = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   // Service data
   const services = [
     {
       id: 1,
       title: 'Digital Marketing',
       description: 'Boost your online presence with our data-driven marketing strategies.',
-      icon: <FaChartLine size={48} className="text-primary" />
+      icon: <FaChartLine size={48} className="text-white" />,
+      features: [
+        'SEO & Content Marketing',
+        'Social Media Management',
+        'PPC Campaigns',
+        'Analytics & Reporting'
+      ]
     },
     {
       id: 2,
       title: 'AI Development',
       description: 'Cutting-edge AI solutions to automate and optimize your business processes.',
-      icon: <FaRobot size={48} className="text-primary" />
+      icon: <FaRobot size={48} className="text-white" />,
+      features: [
+        'AI Chatbots',
+        'Machine Learning Models',
+        'Predictive Analytics',
+        'Natural Language Processing'
+      ]
     },
     {
       id: 3,
       title: 'Web & App Development',
       description: 'Custom websites and mobile applications built for performance and scalability.',
-      icon: <FaLaptopCode size={48} className="text-primary" />
+      icon: <FaLaptopCode size={48} className="text-white" />,
+      features: [
+        'Responsive Web Design',
+        'E-commerce Solutions',
+        'Mobile Applications',
+        'Progressive Web Apps'
+      ]
     }
   ];
 
@@ -30,56 +63,89 @@ const Home = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Alex Johnson',
-      company: 'TechStart Inc.',
-      quote: 'VynixCore transformed our digital presence. Their AI solution saved us 40 hours per week!'
+      name: 'Nusrat Jahan',
+      company: 'Dhaka Tech Solutions',
+      quote: 'VynixCore transformed our digital presence. Their AI solution saved us 40 hours per week!',
+      rating: 5
     },
     {
       id: 2,
-      name: 'Sarah Williams',
-      company: 'EcomGrowth LLC',
-      quote: 'The web development team delivered beyond our expectations. Highly recommended!'
+      name: 'Rahim Ahmed',
+      company: 'Chittagong Ecom',
+      quote: 'The web development team delivered beyond our expectations. Highly recommended!',
+      rating: 5
     },
     {
       id: 3,
-      name: 'Michael Chen',
-      company: 'InnovateCo',
-      quote: 'Their digital marketing expertise helped us double our online conversions in just 3 months.'
+      name: 'Tasnim Khan',
+      company: 'Sylhet Innovations',
+      quote: 'Their digital marketing expertise helped us double our online conversions in just 3 months.',
+      rating: 5
     }
+  ];
+
+  // Stats data
+  const stats = [
+    { number: '100+', label: 'Projects Delivered' },
+    { number: '98%', label: 'Client Satisfaction' },
+    { number: '50+', label: 'Happy Clients' },
+    { number: '24/7', label: 'Support' }
   ];
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-primary text-white py-5">
-        <Container className="py-5">
-          <Row>
-            <Col md={8} className="mx-auto text-center">
-              <motion.h1 
-                className="display-4 fw-bold mb-4"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                Powering Your Digital Future with VynixCore
-              </motion.h1>
-              <motion.p 
-                className="lead mb-4"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                Your all-in-one solution for digital transformation in 2025. 
-                We specialize in AI, web development, and digital marketing.
-              </motion.p>
+      <section className="hero-section position-relative py-5">
+        <div className="hero-overlay"></div>
+        <Container className="py-5 position-relative">
+          <Row className="align-items-center">
+            <Col lg={6} className="mb-5 mb-lg-0">
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
+                className="hero-content"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ duration: 0.8 }}
               >
-                <Button variant="light" size="lg" href="/contact">
-                  Get a Free Consultation
-                </Button>
+                <h1 className="display-3 fw-bold mb-4 text-gradient">
+                  Powering Your Digital Future with VynixCore
+                </h1>
+                <p className="lead mb-4">
+                  Your all-in-one solution for digital transformation in 2025. 
+                  We specialize in AI, web development, and digital marketing from our base in Bangladesh.
+                </p>
+                <div className="d-flex flex-wrap gap-3">
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      variant="primary" 
+                      size="lg" 
+                      className="rounded-pill px-4 py-2"
+                      href="/contact"
+                    >
+                      Get a Free Consultation
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      variant="outline-primary" 
+                      size="lg" 
+                      className="rounded-pill px-4 py-2"
+                      href="/portfolio"
+                    >
+                      View Our Work
+                    </Button>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </Col>
+            <Col lg={6}>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div className="hero-image-container p-4 rounded-4 shadow-lg">
+                  <div className="hero-image-placeholder bg-gradient rounded-3" style={{ height: '400px' }}></div>
+                </div>
               </motion.div>
             </Col>
           </Row>
@@ -89,24 +155,51 @@ const Home = () => {
       {/* Service Highlights */}
       <section className="py-5">
         <Container>
-          <Row className="mb-5">
-            <Col md={8} className="mx-auto text-center">
-              <h2 className="display-5 fw-bold mb-3">Our Services</h2>
-              <p className="lead">
-                We offer a comprehensive suite of digital services to help your business thrive in the modern economy.
-              </p>
-            </Col>
-          </Row>
+          <motion.div
+            className="text-center mb-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="display-5 fw-bold mb-3">Our <span className="text-gradient">Services</span></h2>
+            <p className="lead mx-auto" style={{ maxWidth: '700px' }}>
+              We offer a comprehensive suite of digital services to help your business thrive in the modern economy.
+            </p>
+          </motion.div>
+          
           <Row>
-            {services.map((service) => (
+            {services.map((service, index) => (
               <Col key={service.id} md={4} className="mb-4">
-                <Card className="h-100 shadow-sm">
-                  <Card.Body className="d-flex flex-column align-items-center text-center">
-                    <div className="mb-3">{service.icon}</div>
-                    <Card.Title>{service.title}</Card.Title>
-                    <Card.Text>{service.description}</Card.Text>
-                  </Card.Body>
-                </Card>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="service-card h-100 border-0 shadow-lg">
+                    <Card.Body className="d-flex flex-column align-items-center text-center p-4">
+                      <div className="service-icon mb-4">
+                        {service.icon}
+                      </div>
+                      <Card.Title className="fw-bold mb-3">{service.title}</Card.Title>
+                      <Card.Text className="mb-4">{service.description}</Card.Text>
+                      <ul className="list-unstyled text-start w-100 mb-4">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="mb-2">
+                            <FaCheckCircle className="text-success me-2" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <Button variant="outline-primary" className="rounded-pill px-4">
+                          Learn More
+                        </Button>
+                      </motion.div>
+                    </Card.Body>
+                  </Card>
+                </motion.div>
               </Col>
             ))}
           </Row>
@@ -114,24 +207,86 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="bg-light py-5">
+      <section className="stats-section py-5">
         <Container>
-          <Row className="text-center">
-            <Col md={3} className="mb-4">
-              <h2 className="display-4 fw-bold text-primary">100+</h2>
-              <p className="lead">Projects Delivered</p>
+          <Row>
+            {stats.map((stat, index) => (
+              <Col key={index} md={3} className="mb-4 mb-md-0">
+                <motion.div
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <h2 className="display-4 fw-bold mb-2">{stat.number}</h2>
+                  <p className="lead mb-0">{stat.label}</p>
+                </motion.div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* About CEO Section */}
+      <section className="py-5 bg-light">
+        <Container>
+          <Row className="align-items-center">
+            <Col lg={5} className="mb-5 mb-lg-0">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <div className="ceo-image-container rounded-4 overflow-hidden shadow-lg">
+                  <div className="ceo-placeholder bg-gradient" style={{ height: '400px' }}></div>
+                </div>
+              </motion.div>
             </Col>
-            <Col md={3} className="mb-4">
-              <h2 className="display-4 fw-bold text-primary">98%</h2>
-              <p className="lead">Client Satisfaction</p>
-            </Col>
-            <Col md={3} className="mb-4">
-              <h2 className="display-4 fw-bold text-primary">50+</h2>
-              <p className="lead">Happy Clients</p>
-            </Col>
-            <Col md={3} className="mb-4">
-              <h2 className="display-4 fw-bold text-primary">24/7</h2>
-              <p className="lead">Support</p>
+            <Col lg={7}>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <h2 className="display-5 fw-bold mb-4">
+                  Meet Your <span className="text-gradient">CEO & Founder</span>
+                </h2>
+                <p className="lead mb-4">
+                  Hi, I'm Zahid Hasan Tonmoy, the founder and CEO of VynixCore. With over 7 years of experience in digital technologies, I've helped numerous businesses transform their digital presence.
+                </p>
+                <p className="mb-4">
+                  Based in Bangladesh, I lead a team of passionate developers, designers, and marketers who are committed to delivering cutting-edge solutions that drive real business results.
+                </p>
+                <div className="d-flex align-items-center mb-4">
+                  <div className="me-3">
+                    <FaQuoteLeft className="text-primary" size={24} />
+                  </div>
+                  <blockquote className="fst-italic mb-0">
+                    "Innovation is not just about technology; it's about solving real problems for real people."
+                  </blockquote>
+                </div>
+                <div className="d-flex flex-wrap gap-3">
+                  <Button 
+                    variant="primary" 
+                    className="rounded-pill px-4"
+                    href="https://zahidhasantonmoy.vercel.app/"
+                    target="_blank"
+                  >
+                    View My Portfolio
+                  </Button>
+                  <Button 
+                    variant="outline-primary" 
+                    className="rounded-pill px-4"
+                    href="https://www.facebook.com/zahidhasantonmoybd"
+                    target="_blank"
+                  >
+                    Connect on Facebook
+                  </Button>
+                </div>
+              </motion.div>
             </Col>
           </Row>
         </Container>
@@ -140,29 +295,79 @@ const Home = () => {
       {/* Testimonial Slider */}
       <section className="py-5">
         <Container>
-          <Row className="mb-5">
-            <Col md={8} className="mx-auto text-center">
-              <h2 className="display-5 fw-bold mb-3">What Our Clients Say</h2>
-              <p className="lead">
-                Don't just take our word for it. Here's what our clients have to say about working with us.
-              </p>
-            </Col>
-          </Row>
+          <motion.div
+            className="text-center mb-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="display-5 fw-bold mb-3">What Our <span className="text-gradient">Clients Say</span></h2>
+            <p className="lead mx-auto" style={{ maxWidth: '700px' }}>
+              Don't just take our word for it. Here's what our clients have to say about working with us.
+            </p>
+          </motion.div>
+          
           <Row>
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial, index) => (
               <Col key={testimonial.id} md={4} className="mb-4">
-                <Card className="h-100 shadow-sm">
-                  <Card.Body>
-                    <Card.Text className="fst-italic">"{testimonial.quote}"</Card.Text>
-                  </Card.Body>
-                  <Card.Footer className="bg-white border-0">
-                    <strong>{testimonial.name}</strong>
-                    <br />
-                    <small className="text-muted">{testimonial.company}</small>
-                  </Card.Footer>
-                </Card>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="testimonial-card h-100 border-0 shadow">
+                    <Card.Body className="d-flex flex-column p-4">
+                      <div className="mb-3">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <FaStar key={i} className="text-warning me-1" />
+                        ))}
+                      </div>
+                      <Card.Text className="fst-italic mb-4">
+                        <FaQuoteLeft className="text-primary me-2" />
+                        {testimonial.quote}
+                      </Card.Text>
+                      <div className="mt-auto">
+                        <h6 className="mb-0">{testimonial.name}</h6>
+                        <small className="text-muted">{testimonial.company}</small>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </motion.div>
               </Col>
             ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-5 bg-gradient text-white">
+        <Container>
+          <Row>
+            <Col md={8} className="mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h2 className="display-5 fw-bold mb-4">Ready to Transform Your Business?</h2>
+                <p className="lead mb-4">
+                  Let's discuss how VynixCore can help you achieve your digital goals with our expertise from Bangladesh.
+                </p>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    variant="light" 
+                    size="lg" 
+                    className="rounded-pill px-5 py-3 fw-bold"
+                    href="/contact"
+                  >
+                    Get in Touch Today
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </Col>
           </Row>
         </Container>
       </section>

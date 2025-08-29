@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
-import { FaLink, FaGithub } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { 
+  FaLink, 
+  FaGithub, 
+  FaExternalLinkAlt,
+  FaFilter,
+  FaLaptop,
+  FaMobileAlt,
+  FaRobot
+} from 'react-icons/fa';
+import './Portfolio.css';
 
 const Portfolio = () => {
   const [filter, setFilter] = useState('all');
@@ -65,6 +75,26 @@ const Portfolio = () => {
       technologies: ['React Native', 'MongoDB', 'Stripe API'],
       demoLink: '#',
       codeLink: '#'
+    },
+    {
+      id: 7,
+      title: 'Inventory Management System',
+      description: 'A web-based solution for tracking and managing business inventory.',
+      category: 'web',
+      image: 'https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+      technologies: ['Angular', 'Node.js', 'MongoDB'],
+      demoLink: '#',
+      codeLink: '#'
+    },
+    {
+      id: 8,
+      title: 'Smart Home Automation',
+      description: 'AI-powered system for controlling home devices and appliances.',
+      category: 'ai',
+      image: 'https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+      technologies: ['Python', 'IoT', 'Machine Learning'],
+      demoLink: '#',
+      codeLink: '#'
     }
   ];
 
@@ -73,25 +103,31 @@ const Portfolio = () => {
     : projects.filter(project => project.category === filter);
 
   const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'web', name: 'Web Development' },
-    { id: 'app', name: 'App Development' },
-    { id: 'ai', name: 'AI Development' }
+    { id: 'all', name: 'All Projects', icon: <FaFilter /> },
+    { id: 'web', name: 'Web Development', icon: <FaLaptop /> },
+    { id: 'app', name: 'App Development', icon: <FaMobileAlt /> },
+    { id: 'ai', name: 'AI Development', icon: <FaRobot /> }
   ];
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-primary text-white py-5">
+      <section className="portfolio-hero py-5">
         <Container className="py-5">
-          <Row>
-            <Col md={10} className="mx-auto text-center">
-              <h1 className="display-4 fw-bold mb-4">Our Portfolio</h1>
-              <p className="lead">
-                Explore our latest projects and see how we've helped businesses transform their digital presence.
-              </p>
-            </Col>
-          </Row>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <h1 className="display-3 fw-bold mb-4 text-gradient">
+              Our <span className="text-primary">Portfolio</span>
+            </h1>
+            <p className="lead mx-auto" style={{ maxWidth: '800px' }}>
+              Explore our latest projects and see how we've helped businesses transform their digital presence. 
+              From AI solutions to web and mobile applications, discover the innovative work we've created from our base in Bangladesh.
+            </p>
+          </motion.div>
         </Container>
       </section>
 
@@ -100,16 +136,22 @@ const Portfolio = () => {
         <Container>
           <Row>
             <Col>
-              <div className="d-flex flex-wrap justify-content-center">
+              <div className="d-flex flex-wrap justify-content-center gap-2">
                 {categories.map((category) => (
-                  <Button
+                  <motion.div
                     key={category.id}
-                    variant={filter === category.id ? 'primary' : 'outline-primary'}
-                    className="me-2 mb-2"
-                    onClick={() => setFilter(category.id)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {category.name}
-                  </Button>
+                    <Button
+                      variant={filter === category.id ? 'primary' : 'outline-primary'}
+                      className="rounded-pill px-4 py-2 d-flex align-items-center"
+                      onClick={() => setFilter(category.id)}
+                    >
+                      <span className="me-2">{category.icon}</span>
+                      {category.name}
+                    </Button>
+                  </motion.div>
                 ))}
               </div>
             </Col>
@@ -121,35 +163,63 @@ const Portfolio = () => {
       <section className="py-5">
         <Container>
           <Row>
-            {filteredProjects.map((project) => (
-              <Col key={project.id} md={4} className="mb-4">
-                <Card className="h-100 shadow-sm">
-                  <Card.Img 
-                    variant="top" 
-                    src={project.image} 
-                    alt={project.title}
-                    style={{ height: '200px', objectFit: 'cover' }}
-                  />
-                  <Card.Body className="d-flex flex-column">
-                    <Card.Title>{project.title}</Card.Title>
-                    <Card.Text>{project.description}</Card.Text>
-                    <div className="mb-3">
-                      {project.technologies.map((tech, index) => (
-                        <Badge key={index} bg="secondary" className="me-1">
-                          {tech}
-                        </Badge>
-                      ))}
+            {filteredProjects.map((project, index) => (
+              <Col key={project.id} md={6} lg={4} className="mb-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="project-card h-100 border-0 shadow">
+                    <div className="project-image-container">
+                      <Card.Img 
+                        variant="top" 
+                        src={project.image} 
+                        alt={project.title}
+                        className="project-image"
+                      />
+                      <div className="project-overlay">
+                        <div className="project-category">
+                          {categories.find(cat => cat.id === project.category)?.name}
+                        </div>
+                      </div>
                     </div>
-                    <div className="mt-auto">
-                      <Button variant="primary" className="me-2" href={project.demoLink}>
-                        <FaLink className="me-1" /> Demo
-                      </Button>
-                      <Button variant="outline-primary" href={project.codeLink}>
-                        <FaGithub className="me-1" /> Code
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
+                    <Card.Body className="d-flex flex-column p-4">
+                      <Card.Title className="fw-bold mb-2">{project.title}</Card.Title>
+                      <Card.Text className="flex-grow-1 mb-3">{project.description}</Card.Text>
+                      <div className="mb-3">
+                        {project.technologies.map((tech, index) => (
+                          <Badge key={index} bg="secondary" className="me-1 mb-1">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <div className="mt-auto d-flex gap-2">
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Button 
+                            variant="primary" 
+                            size="sm" 
+                            className="rounded-pill px-3"
+                            href={project.demoLink}
+                          >
+                            <FaExternalLinkAlt className="me-1" /> Demo
+                          </Button>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Button 
+                            variant="outline-primary" 
+                            size="sm" 
+                            className="rounded-pill px-3"
+                            href={project.codeLink}
+                          >
+                            <FaGithub className="me-1" /> Code
+                          </Button>
+                        </motion.div>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </motion.div>
               </Col>
             ))}
           </Row>
@@ -157,17 +227,31 @@ const Portfolio = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-primary text-white py-5">
+      <section className="py-5 bg-gradient text-white">
         <Container>
           <Row>
             <Col md={8} className="mx-auto text-center">
-              <h2 className="display-5 fw-bold mb-4">Have a Project in Mind?</h2>
-              <p className="lead mb-4">
-                Let's discuss how we can help bring your vision to life.
-              </p>
-              <Button variant="light" size="lg" href="/contact">
-                Get in Touch
-              </Button>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h2 className="display-5 fw-bold mb-4">Have a Project in Mind?</h2>
+                <p className="lead mb-4">
+                  Let's discuss how we can help bring your vision to life with our expertise from Bangladesh.
+                </p>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    variant="light" 
+                    size="lg" 
+                    className="rounded-pill px-5 py-3 fw-bold"
+                    href="/contact"
+                  >
+                    Get in Touch
+                  </Button>
+                </motion.div>
+              </motion.div>
             </Col>
           </Row>
         </Container>
