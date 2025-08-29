@@ -149,7 +149,16 @@ const About = () => {
                 transition={{ duration: 0.7 }}
               >
                 <div className="story-image-container rounded-4 overflow-hidden shadow-lg">
-                  <div className="story-placeholder bg-gradient" style={{ height: '450px' }}></div>
+                  <img 
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" 
+                    alt="Our Story" 
+                    className="story-image rounded-3" 
+                    style={{ width: '100%', height: '450px', objectFit: 'cover' }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80';
+                    }}
+                  />
                 </div>
               </motion.div>
             </Col>

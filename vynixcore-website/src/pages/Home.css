@@ -24,9 +24,10 @@
   border: 1px solid rgba(37, 99, 235, 0.2);
 }
 
-.hero-image-placeholder {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  opacity: 0.8;
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Stats Section */
@@ -143,6 +144,10 @@
     height: 70px;
     font-size: 1.5rem;
   }
+  
+  .hero-image {
+    height: 300px !important;
+  }
 }
 
 @media (max-width: 576px) {
@@ -155,6 +160,10 @@
   }
   
   .ceo-image {
+    height: 250px !important;
+  }
+  
+  .hero-image {
     height: 250px !important;
   }
 }

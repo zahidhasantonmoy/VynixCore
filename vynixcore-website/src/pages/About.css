@@ -34,9 +34,10 @@
   overflow: hidden;
 }
 
-.story-placeholder {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  opacity: 0.9;
+.story-image {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Value Cards */
@@ -204,6 +205,10 @@
     height: 70px;
     font-size: 1.2rem;
   }
+  
+  .story-image {
+    height: 400px !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -257,6 +262,10 @@
   .display-5 {
     font-size: 1.8rem;
   }
+  
+  .story-image {
+    height: 350px !important;
+  }
 }
 
 @media (max-width: 576px) {
@@ -277,5 +286,9 @@
   
   .team-image {
     height: 180px;
+  }
+  
+  .story-image {
+    height: 300px !important;
   }
 }

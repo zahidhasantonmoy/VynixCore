@@ -144,7 +144,16 @@ const Home = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <div className="hero-image-container p-4 rounded-4 shadow-lg">
-                  <div className="hero-image-placeholder bg-gradient rounded-3" style={{ height: '400px' }}></div>
+                  <img 
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" 
+                    alt="Digital Transformation" 
+                    className="hero-image rounded-3" 
+                    style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80';
+                    }}
+                  />
                 </div>
               </motion.div>
             </Col>
