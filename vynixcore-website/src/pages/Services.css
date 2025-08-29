@@ -132,6 +132,18 @@
 }
 
 /* Responsive Adjustments */
+@media (max-width: 992px) {
+  .service-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+  
+  .project-image {
+    height: 180px;
+  }
+}
+
 @media (max-width: 768px) {
   .service-icon {
     width: 60px;
@@ -140,6 +152,20 @@
   }
   
   .project-image {
-    height: 180px;
+    height: 160px;
+  }
+  
+  .display-5 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .project-image {
+    height: 140px;
+  }
+  
+  .service-card {
+    margin-bottom: 1.5rem;
   }
 }

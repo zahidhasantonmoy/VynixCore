@@ -132,6 +132,17 @@
 }
 
 /* Responsive Adjustments */
+@media (max-width: 992px) {
+  .chat-container {
+    height: 280px;
+  }
+  
+  .ceo-image {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
 @media (max-width: 768px) {
   .chat-container {
     height: 250px;
@@ -141,5 +152,29 @@
     width: 36px;
     height: 36px;
     font-size: 0.9rem;
+  }
+  
+  .ceo-image {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .display-3 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .chat-container {
+    height: 200px;
+  }
+  
+  .ceo-image {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .contact-card {
+    margin-bottom: 1.5rem;
   }
 }

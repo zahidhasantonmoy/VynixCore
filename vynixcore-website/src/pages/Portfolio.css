@@ -101,9 +101,15 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .project-image {
     height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-image {
+    height: 160px;
   }
   
   .filter-buttons {
@@ -113,5 +119,24 @@
   .filter-button {
     padding: 8px 15px;
     font-size: 0.9rem;
+  }
+  
+  .display-5 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .project-image {
+    height: 140px;
+  }
+  
+  .filter-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .project-card {
+    margin-bottom: 1.5rem;
   }
 }

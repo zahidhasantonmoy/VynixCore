@@ -240,7 +240,16 @@ const Home = () => {
                 transition={{ duration: 0.7 }}
               >
                 <div className="ceo-image-container rounded-4 overflow-hidden shadow-lg">
-                  <div className="ceo-placeholder bg-gradient" style={{ height: '400px' }}></div>
+                  <img 
+                    src="/images/ceo.jpg" 
+                    alt="Zahid Hasan Tonmoy" 
+                    className="ceo-image" 
+                    style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80';
+                    }}
+                  />
                 </div>
               </motion.div>
             </Col>
@@ -252,7 +261,7 @@ const Home = () => {
                 transition={{ duration: 0.7 }}
               >
                 <h2 className="display-5 fw-bold mb-4">
-                  Meet Your <span className="text-gradient">CEO & Founder</span>
+                  Meet Our <span className="text-gradient">CEO & Founder</span>
                 </h2>
                 <p className="lead mb-4">
                   Hi, I'm Zahid Hasan Tonmoy, the founder and CEO of VynixCore. With over 7 years of experience in digital technologies, I've helped numerous businesses transform their digital presence.

@@ -231,6 +231,10 @@ const Contact = () => {
                             alt="Zahid Hasan Tonmoy" 
                             className="ceo-image rounded-circle" 
                             style={{ width: '60px', height: '60px', objectFit: 'cover' }}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80';
+                            }}
                           />
                         </div>
                         <h6 className="mb-1">CEO & Founder</h6>
