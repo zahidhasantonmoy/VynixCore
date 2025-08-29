@@ -227,7 +227,7 @@ const Contact = () => {
                       <div>
                         <div className="mb-2">
                           <img 
-                            src="/images/ceo.jpg" 
+                            src="/ceo.jpg" 
                             alt="Zahid Hasan Tonmoy" 
                             className="ceo-image rounded-circle" 
                             style={{ width: '60px', height: '60px', objectFit: 'cover' }}

@@ -250,7 +250,7 @@ const Home = () => {
               >
                 <div className="ceo-image-container rounded-4 overflow-hidden shadow-lg">
                   <img 
-                    src="/images/ceo.jpg" 
+                    src="/ceo.jpg" 
                     alt="Zahid Hasan Tonmoy" 
                     className="ceo-image" 
                     style={{ width: '100%', height: '400px', objectFit: 'cover' }}
