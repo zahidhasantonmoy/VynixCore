@@ -9,11 +9,9 @@ import {
   FaFacebook,
   FaLinkedin,
   FaTwitter,
-  FaSend,
-  FaUser,
-  FaPaperPlane
+  FaPaperPlane,
+  FaUser
 } from 'react-icons/fa';
-import ceoImage from '../../images/ceo.jpg';
 import './Contact.css';
 
 const Contact = () => {
@@ -229,7 +227,7 @@ const Contact = () => {
                       <div>
                         <div className="mb-2">
                           <img 
-                            src={ceoImage} 
+                            src="/images/ceo.jpg" 
                             alt="Zahid Hasan Tonmoy" 
                             className="ceo-image rounded-circle" 
                             style={{ width: '60px', height: '60px', objectFit: 'cover' }}
@@ -308,7 +306,7 @@ const Contact = () => {
                             type="submit"
                             className="rounded-end"
                           >
-                            <FaSend />
+                            <FaPaperPlane />
                           </Button>
                         </motion.div>
                       </InputGroup>
