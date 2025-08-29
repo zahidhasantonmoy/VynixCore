@@ -50,6 +50,12 @@
   font-size: 1rem;
 }
 
+/* CEO Image */
+.ceo-image {
+  border: 3px solid var(--primary);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
 /* Chat Container */
 .chat-container {
   height: 300px;

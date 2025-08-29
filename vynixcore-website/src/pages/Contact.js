@@ -11,9 +11,9 @@ import {
   FaTwitter,
   FaSend,
   FaUser,
-  FaPaperPlane,
-  FaClock
+  FaPaperPlane
 } from 'react-icons/fa';
+import ceoImage from '../../images/ceo.jpg';
 import './Contact.css';
 
 const Contact = () => {
@@ -227,6 +227,14 @@ const Contact = () => {
                         <FaUser />
                       </div>
                       <div>
+                        <div className="mb-2">
+                          <img 
+                            src={ceoImage} 
+                            alt="Zahid Hasan Tonmoy" 
+                            className="ceo-image rounded-circle" 
+                            style={{ width: '60px', height: '60px', objectFit: 'cover' }}
+                          />
+                        </div>
                         <h6 className="mb-1">CEO & Founder</h6>
                         <p className="mb-2">Zahid Hasan Tonmoy</p>
                         <div className="d-flex gap-2">
