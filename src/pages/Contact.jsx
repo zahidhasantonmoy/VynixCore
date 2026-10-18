@@ -1,111 +1,342 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Container, Row, Col, Card, Form, Button, InputGroup, Alert } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import { 
+  FaRobot, 
+  FaEnvelope, 
+  FaPhone, 
+  FaMapMarkerAlt,
+  FaFacebook,
+  FaLinkedin,
+  FaTwitter,
+  FaPaperPlane,
+  FaUser
+} from 'react-icons/fa';
+import './Contact.css';
 
 const Contact = () => {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    if (input.trim()) {
-      const newMessages = [...messages, { text: input, sender: 'user' }];
-      setMessages(newMessages);
-      setInput('');
-
-      // Simulate bot response
-      setTimeout(() => {
-        let botResponse = "I'm sorry, I didn't understand that. Please ask about our services (Digital Marketing, Web Development, AI Development, App Development) or how to get a consultation.";
-        if (input.toLowerCase().includes('service')) {
-          botResponse = "VynixCore offers Digital Marketing, Web Development, AI Development, and App Development services. Which one are you interested in?";
-        } else if (input.toLowerCase().includes('consultation')) {
-          botResponse = "You can get a free consultation by filling out the form on this page or by calling us at +1 (555) 123-4567.";
-        } else if (input.toLowerCase().includes('digital marketing')) {
-          botResponse = "Our Digital Marketing services include SEO, PPC, social media, and content strategy to boost your online presence.";
-        } else if (input.toLowerCase().includes('web development')) {
-          botResponse = "We specialize in responsive websites, e-commerce solutions, and custom web applications.";
-        } else if (input.toLowerCase().includes('ai development')) {
-          botResponse = "Our AI Development services cover chatbots, predictive analytics, and automation MVPs.";
-        } else if (input.toLowerCase().includes('app development')) {
-          botResponse = "We build cross-platform mobile and web applications tailored to your needs.";
-        }
-        setMessages([...newMessages, { text: botResponse, sender: 'bot' }]);
-      }, 1000);
+  const [chatMessages, setChatMessages] = useState([
+    {
+      id: 1,
+      text: "Hello! I'm VynixBot, your AI assistant. How can I help you today?",
+      sender: 'bot'
     }
+  ]);
+
+  const [userInput, setUserInput] = useState('');
+  const chatContainerRef = useRef(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  const handleChatSubmit = (e) => {
+    e.preventDefault();
+    if (!userInput.trim()) return;
+
+    const inputMsg = userInput;
+    const newUserMessage = {
+      id: Date.now(),
+      text: inputMsg,
+      sender: 'user'
+    };
+
+    setChatMessages((prev) => [...prev, newUserMessage]);
+    setUserInput('');
+
+    setTimeout(() => {
+      let botResponse = "Thanks for your message! Our team will get back to you shortly.";
+      const lower = inputMsg.toLowerCase();
+      if (lower.includes('service') || lower.includes('what do you do')) {
+        botResponse = "VynixCore offers Digital Marketing (SEO/PPC/Social), Web Development, AI Development (chatbots & ML), and Mobile App Development. Which one interests you?";
+      } else if (lower.includes('consultation') || lower.includes('quote') || lower.includes('price')) {
+        botResponse = "We offer free initial consultations! Feel free to submit the contact form on this page or email us directly at zahidhasantonmoybd@gmail.com.";
+      } else if (lower.includes('ai') || lower.includes('bot') || lower.includes('model')) {
+        botResponse = "Our AI team specializes in conversational bots, predictive analytics, recommendation systems, and automated workflows.";
+      } else if (lower.includes('location') || lower.includes('where') || lower.includes('bangladesh')) {
+        botResponse = "We are headquartered in Dhaka, Bangladesh, and we collaborate with clients worldwide!";
+      } else if (lower.includes('hello') || lower.includes('hi')) {
+        botResponse = "Hello there! Glad to meet you. Tell me about your next project or goal!";
+      }
+
+      const newBotMessage = {
+        id: Date.now() + 1,
+        text: botResponse,
+        sender: 'bot'
+      };
+
+      setChatMessages((prev) => [...prev, newBotMessage]);
+    }, 700);
+  };
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chatMessages]);
+
   return (
-    <div className="container mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold text-center text-gray-900 mb-12">Contact Us</h1>
+    <div>
+      {/* Hero Section */}
+      <section className="contact-hero py-5">
+        <Container className="py-5">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <h1 className="display-3 fw-bold mb-4 text-gradient">
+              Contact <span className="text-primary">Us</span>
+            </h1>
+            <p className="lead mx-auto" style={{ maxWidth: '800px' }}>
+              Have a project in mind? Get in touch with us today. 
+              Based in Bangladesh, we serve clients globally with cutting-edge digital solutions.
+            </p>
+          </motion.div>
+        </Container>
+      </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Contact Form */}
-        <div>
-          <h2 className="text-3xl font-semibold text-gray-800 mb-6">Send Us a Message</h2>
-          <form className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-lg font-medium text-gray-700">Name</label>
-              <input type="text" id="name" name="name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
-              <input type="email" id="email" name="email" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-lg font-medium text-gray-700">Message</label>
-              <textarea id="message" name="message" rows="4" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-            </div>
-            {/* CAPTCHA Placeholder */}
-            <div className="text-gray-600 text-sm">
-              CAPTCHA will be integrated here for security.
-            </div>
-            <button type="submit" className="bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300">Send Message</button>
-          </form>
-        </div>
+      <section className="py-5">
+        <Container>
+          <Row>
+            {/* Contact Form */}
+            <Col lg={6} className="mb-5">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <Card className="contact-card h-100 border-0 shadow">
+                  <Card.Body className="p-4">
+                    <Card.Title className="mb-4 fw-bold">Send Us a Message</Card.Title>
+                    {formSubmitted && (
+                      <Alert variant="success" onClose={() => setFormSubmitted(false)} dismissible>
+                        Thank you for your message! Our team at VynixCore will get back to you soon.
+                      </Alert>
+                    )}
+                    <Form onSubmit={handleSubmit}>
+                      <Form.Group className="mb-3" controlId="formName">
+                        <InputGroup>
+                          <InputGroup.Text>
+                            <FaUser />
+                          </InputGroup.Text>
+                          <Form.Control 
+                            type="text" 
+                            name="name" 
+                            value={formData.name} 
+                            onChange={handleChange} 
+                            placeholder="Your Name"
+                            required 
+                          />
+                        </InputGroup>
+                      </Form.Group>
 
-        {/* Contact Info & Map */}
-        <div>
-          <h2 className="text-3xl font-semibold text-gray-800 mb-6">Our Contact Information</h2>
-          <div className="space-y-4 text-lg text-gray-700">
-            <p><strong>Email:</strong> info@vynixcore.com</p>
-            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
-            <p><strong>Address:</strong> 123 Digital Way, Tech City, TC 98765</p>
-          </div>
+                      <Form.Group className="mb-3" controlId="formEmail">
+                        <InputGroup>
+                          <InputGroup.Text>
+                            <FaEnvelope />
+                          </InputGroup.Text>
+                          <Form.Control 
+                            type="email" 
+                            name="email" 
+                            value={formData.email} 
+                            onChange={handleChange} 
+                            placeholder="Your Email"
+                            required 
+                          />
+                        </InputGroup>
+                      </Form.Group>
 
-          {/* Google Maps Embed Placeholder */}
-          <div className="mt-8">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Find Us on the Map</h3>
-            <div className="bg-gray-200 h-64 flex items-center justify-center rounded-md text-gray-600">
-              Google Maps Embed will go here
-              {/* Example: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe> */}
-            </div>
-          </div>
+                      <Form.Group className="mb-4" controlId="formMessage">
+                        <Form.Control 
+                          as="textarea" 
+                          rows={5} 
+                          name="message" 
+                          value={formData.message} 
+                          onChange={handleChange} 
+                          placeholder="Your Message"
+                          required 
+                        />
+                      </Form.Group>
 
-          {/* AI Chatbot Demo */}
-          <div className="mt-8">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Try Our AI Chatbot Demo</h3>
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md h-80 flex flex-col">
-              <div className="flex-grow overflow-y-auto mb-4 p-2 border border-gray-300 rounded-md">
-                {messages.map((msg, index) => (
-                  <div key={index} className={`mb-2 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
-                    <span className={`inline-block p-2 rounded-lg ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800'}`}>
-                      {msg.text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <form onSubmit={handleSendMessage} className="flex">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type your message..."
-                  className="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition duration-300">Send</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <Button variant="primary" type="submit" className="w-100 rounded-pill py-2">
+                          <FaPaperPlane className="me-2" />
+                          Send Message
+                        </Button>
+                      </motion.div>
+                    </Form>
+                  </Card.Body>
+                </Card>
+              </motion.div>
+            </Col>
+
+            {/* Contact Info and Chatbot */}
+            <Col lg={6}>
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <Card className="contact-card mb-4 border-0 shadow">
+                  <Card.Body className="p-4">
+                    <Card.Title className="mb-4 fw-bold">Contact Information</Card.Title>
+                    <div className="d-flex align-items-start mb-4">
+                      <div className="contact-icon me-3 mt-1">
+                        <FaEnvelope />
+                      </div>
+                      <div>
+                        <h6 className="mb-1">Email</h6>
+                        <p className="mb-0">zahidhasantonmoybd@gmail.com</p>
+                      </div>
+                    </div>
+                    <div className="d-flex align-items-start mb-4">
+                      <div className="contact-icon me-3 mt-1">
+                        <FaPhone />
+                      </div>
+                      <div>
+                        <h6 className="mb-1">Phone</h6>
+                        <p className="mb-0">+880 1724 348000</p>
+                      </div>
+                    </div>
+                    <div className="d-flex align-items-start mb-4">
+                      <div className="contact-icon me-3 mt-1">
+                        <FaMapMarkerAlt />
+                      </div>
+                      <div>
+                        <h6 className="mb-1">Office</h6>
+                        <p className="mb-0">Dhaka, Bangladesh</p>
+                      </div>
+                    </div>
+                    <div className="d-flex align-items-start">
+                      <div className="contact-icon me-3 mt-1">
+                        <FaUser />
+                      </div>
+                      <div>
+                        <div className="mb-2">
+                          <img 
+                            src="/ceo.jpg" 
+                            alt="Zahid Hasan Tonmoy" 
+                            className="ceo-image rounded-circle" 
+                            style={{ width: '60px', height: '60px', objectFit: 'cover' }}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80';
+                            }}
+                          />
+                        </div>
+                        <h6 className="mb-1">CEO & Founder</h6>
+                        <p className="mb-2">Zahid Hasan Tonmoy</p>
+                        <div className="d-flex gap-2">
+                          <a 
+                            href="https://www.facebook.com/zahidhasantonmoybd" 
+                            className="social-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook"
+                          >
+                            <FaFacebook />
+                          </a>
+                          <a 
+                            href="https://zahidhasantonmoy.vercel.app/" 
+                            className="social-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Portfolio"
+                          >
+                            <FaLinkedin />
+                          </a>
+                          <a 
+                            href="https://twitter.com" 
+                            className="social-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Twitter"
+                          >
+                            <FaTwitter />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </Card.Body>
+                </Card>
+
+                {/* AI Chatbot Demo */}
+                <Card className="contact-card border-0 shadow">
+                  <Card.Body className="p-4">
+                    <Card.Title className="mb-4 d-flex align-items-center fw-bold">
+                      <FaRobot className="text-primary me-2" />
+                      <span>AI Chatbot Demo</span>
+                    </Card.Title>
+                    
+                    <div 
+                      ref={chatContainerRef}
+                      className="chat-container mb-3"
+                    >
+                      {chatMessages.map((message) => (
+                        <div 
+                          key={message.id} 
+                          className={`chat-message ${message.sender}`}
+                        >
+                          <div 
+                            className={`chat-bubble ${message.sender}`}
+                          >
+                            {message.text}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <Form onSubmit={handleChatSubmit}>
+                      <InputGroup>
+                        <Form.Control 
+                          type="text" 
+                          value={userInput} 
+                          onChange={(e) => setUserInput(e.target.value)} 
+                          placeholder="Type your message..." 
+                        />
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Button 
+                            variant="primary" 
+                            type="submit"
+                            className="rounded-end"
+                            aria-label="Send message"
+                          >
+                            <FaPaperPlane />
+                          </Button>
+                        </motion.div>
+                      </InputGroup>
+                    </Form>
+                    
+                    <div className="mt-3">
+                      <small className="text-muted">
+                        This is an interactive demo chatbot for VynixCore inquiries.
+                      </small>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
     </div>
   );
 };

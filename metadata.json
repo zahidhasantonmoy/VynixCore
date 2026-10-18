@@ -1,0 +1,8 @@
+{
+  "name": "VynixCore",
+  "description": "VynixCore - Powering Your Digital Future. All-in-one digital solutions for AI, web and app development, and digital marketing.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

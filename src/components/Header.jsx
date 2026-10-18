@@ -1,23 +1,96 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Header = () => {
-  const navLinkClass = ({ isActive }) =>
-    isActive ? "text-teal-400 font-bold" : "hover:text-teal-400";
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Contact', path: '/contact' }
+  ];
 
   return (
-    <header className="bg-gray-800 text-white p-4">
-      <nav className="container mx-auto flex justify-between items-center" aria-label="Main navigation"> {/* Added aria-label */}
-        <div className="text-2xl font-bold">VynixCore</div>
-        <ul className="flex space-x-4">
-          <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
-          <li><NavLink to="/about" className={navLinkClass}>About</NavLink></li>
-          <li><NavLink to="/services" className={navLinkClass}>Services</NavLink></li>
-          <li><NavLink to="/portfolio" className={navLinkClass}>Portfolio</NavLink></li>
-          <li><NavLink to="/blog" className={navLinkClass}>Blog</NavLink></li>
-          <li><NavLink to="/contact" className={navLinkClass}>Contact</NavLink></li>
-        </ul>
-      </nav>
+    <header>
+      <motion.nav
+        className={`navbar navbar-expand-lg fixed-top ${isScrolled ? 'scrolled' : ''}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Container>
+          <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+            <motion.div
+              className="logo-circle"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <span className="fw-bold">V</span>
+            </motion.div>
+            <span className="ms-2 fw-bold brand-name">VynixCore</span>
+          </Navbar.Brand>
+          
+          <button 
+            className="navbar-toggler border-0" 
+            type="button" 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation"
+          >
+            {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+          
+          <div className={`collapse navbar-collapse ${mobileMenuOpen ? 'show' : ''}`}>
+            <Nav className="ms-auto align-items-lg-center">
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Nav.Link 
+                    as={Link}
+                    to={link.path}
+                    className="mx-2 my-2 my-lg-0"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Nav.Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
+                <Button 
+                  as={Link}
+                  to="/contact"
+                  variant="primary" 
+                  className="rounded-pill px-4 ms-lg-3 mt-2 mt-lg-0"
+                >
+                  Get Started
+                </Button>
+              </motion.div>
+            </Nav>
+          </div>
+        </Container>
+      </motion.nav>
     </header>
   );
 };
